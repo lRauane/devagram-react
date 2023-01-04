@@ -6,7 +6,9 @@
   font-family: $fontRegular;
   font-size: 14px;
 }
-
+.oculto{
+  display: none;
+}
 .avatar{
   border-radius: 50%;
   object-fit: cover;
