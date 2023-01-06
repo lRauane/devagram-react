@@ -1,5 +1,6 @@
 @import "variaveis.scss";
 @import "paginaPublica.scss";
+@import "../pages/Cadastro/cadastro.scss";
 @import "../components/InputPublico/inputPublico.scss";
 @import "../public/Fontes/fonts.scss";
 @import "../components/Button/button.scss";
@@ -16,6 +17,22 @@ body,
   margin: 0;
 }
 
+.desktop{
+  @media screen and (min-width: $desktopBreakPoint) {
+    display: block;
+  }
+  @media screen and (max-width: calc($desktopBreakPoint - 1px)) {
+    display: none;
+  }
+}
+.mobile{
+  @media screen and (min-width: $desktopBreakPoint) {
+    display: none;
+  }
+  @media screen and (max-width: calc($desktopBreakPoint - 1px)) {
+    display: block;
+  }
+}
 input{
   &::placeholder{
     // chorme, opera, safari, farefox
