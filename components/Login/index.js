@@ -17,7 +17,7 @@ export default function Login() {
   return (
     <section className={"login__Section paginaPublica"}>
       <div className="logo__Container">
-        <Image src={Logo} alt={"Logotipo Devagram"} layout="fill" />
+        <Image src={Logo} alt="Logotipo Devagram" layout="fill" className="logo"/>
       </div>
       <div className="conteudo__paginaPublica">
         <form>

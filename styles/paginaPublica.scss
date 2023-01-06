@@ -30,4 +30,43 @@
       font-family: $fontBold;
     }
   }
+
+  @media screen and (min-width: $desktopBreakPoint) {
+    flex-direction: row;
+    padding: 0 140px;
+    font-size: 18px;
+    .logo__Container{
+      flex: 2;
+      height: 30%;
+      margin-bottom: -30px;
+      .logo{
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+    .conteudo__paginaPublica{
+      flex: 1;
+      width: 30%;
+      border: 1px solid $corPrimaria1;
+      border-radius: 26px;
+      padding: 50px;
+    }
+
+    .btn{
+      font-size: 18px;
+      padding: 15px;
+    }
+
+    .rodape_paginaPublica{
+     p, a{
+      font-size: 18px;
+     }   
+    }
+
+    .input__elementos{
+      input{
+        font-size: 16px;
+      }
+    }
+  }
 }
