@@ -1,15 +1,39 @@
-@import 'variaveis.scss';
-@import '../public/Fontes/fonts.scss';
-@import '../components/Button/button.scss';
+@import "variaveis.scss";
+@import "paginaPublica.scss";
+@import "../components/InputPublico/inputPublico.scss";
+@import "../public/Fontes/fonts.scss";
+@import "../components/Button/button.scss";
 
-*{
+* {
   font-family: $fontRegular;
   font-size: 14px;
 }
-.oculto{
+
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+}
+
+input{
+  &::placeholder{
+    // chorme, opera, safari, farefox
+    color: $cinza2;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder{
+    color: $cinza2;
+  }
+  &::-ms-input-placeholder{
+    color: $cinza2;
+  }
+}
+
+.oculto {
   display: none;
 }
-.avatar{
+.avatar {
   border-radius: 50%;
   object-fit: cover;
 }

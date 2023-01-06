@@ -1,0 +1,33 @@
+.paginaPublica{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding:0px 32px;
+  .logo__Container{
+    position: relative;
+    height: 13%;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  .conteudo__paginaPublica{
+    width: 100%;
+  }
+  .btn{
+    padding: 10px;
+    margin-top: 15px;
+  }
+  .rodape_paginaPublica{
+    text-align: center;
+    margin-top: 24px;
+    p{
+      color: $cinza3;
+      margin: 0px 0px 2px;
+    }
+    a{
+      color: $corPrimaria1;
+      font-family: $fontBold;
+    }
+  }
+}
