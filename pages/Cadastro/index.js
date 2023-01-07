@@ -11,6 +11,8 @@ import InputPublico from "../../components/InputPublico";
 import UploadImagem from "../../components/UploadImagem";
 import Avatar from "../../public/Imagens/avatar.svg";
 
+import {validarNome, validarEmail, validarSenha, validarConfirmacaoSenha} from '../../utils/validadores'
+
 
 export default function Cadastro() {
 
@@ -19,6 +21,15 @@ export default function Cadastro() {
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
   const [confirmaçãoSenha, setconfirmaçãoSenha] = useState("")
+
+  const validarForm = () =>{
+    return(
+      validarNome(nome)
+      && validarEmail(email)
+      && validarSenha(senha)
+      && validarConfirmacaoSenha(senha, confirmaçãoSenha)
+    )
+  }
 
   return (
     <section className={"cadastro__Section paginaPublica"}>
@@ -44,6 +55,8 @@ export default function Cadastro() {
             tipo="text"
             aoAlterarValor={e => setNome(e.target.value)}
             valor={nome}
+            mensagemValidacao="O nome precisa de pelo menos 2 caracteres"
+            exibirMensagemValidacao={nome && !validarNome(nome)}
           />
         <InputPublico
             image={Envelope}
@@ -51,6 +64,9 @@ export default function Cadastro() {
             tipo="email"
             aoAlterarValor={e => setEmail(e.target.value)}
             valor={email}
+            mensagemValidacao="E-mail informado não é válido"
+            exibirMensagemValidacao={email && !validarEmail(email)}
+
           />
         <InputPublico
             image={Chave}
@@ -58,6 +74,8 @@ export default function Cadastro() {
             tipo="password"
             aoAlterarValor={e => setSenha(e.target.value)}
             valor={senha}
+            mensagemValidacao="A senha precisa ter pelo menos 3 caracteres!"
+            exibirMensagemValidacao={senha && !validarSenha(senha)}
           />
         <InputPublico
             image={Chave}
@@ -65,10 +83,12 @@ export default function Cadastro() {
             tipo="password"
             aoAlterarValor={e => setconfirmaçãoSenha(e.target.value)}
             valor={confirmaçãoSenha}
+            mensagemValidacao="As senhas precisam ser iguais"
+            exibirMensagemValidacao={confirmaçãoSenha && !validarConfirmacaoSenha(senha, confirmaçãoSenha)}
           />
 
 
-          <Button texto="Cadastrar" tipo="submit" disabilitado={false} />
+          <Button texto="Cadastrar" tipo="submit" disabilitado={!validarForm()} />
         </form>
 
         <div className="rodape_paginaPublica">

@@ -1,18 +1,26 @@
 import InputPublico from "../InputPublico";
 import { useState } from "react";
+
 import Envelope from "../../public/Imagens/envelope.svg";
 import Chave from "../../public/Imagens/chave.svg";
 import Logo from "../../public/Imagens/logo.svg";
+
 import Image from "next/image";
 import Button from "../Button";
 import Link from "next/link";
-
+import {validarEmail, validarSenha} from '../../utils/validadores'
 
 export default function Login() {
 
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
 
+  const validarForm = () =>{
+    return (
+      validarEmail(email)
+      && validarSenha(senha)
+    )
+  }
 
   return (
     <section className={"login__Section paginaPublica"}>
@@ -27,6 +35,8 @@ export default function Login() {
             tipo="email"
             aoAlterarValor={e => setEmail(e.target.value)}
             valor={email}
+            mensagemValidacao="O endereço de E-mail informado é inválido"
+            exibirMensagemValidacao={email && !validarEmail(email)}
           />
 
           <InputPublico
@@ -35,9 +45,11 @@ export default function Login() {
             tipo="password"
             aoAlterarValor={e => setSenha(e.target.value)}
             valor={senha}
+            mensagemValidacao="Precisa ter pelo menos 3 caracteres!"
+            exibirMensagemValidacao={senha && !validarSenha(senha)}
           />
 
-          <Button texto="Login" tipo="submit" disabilitado={false} />
+          <Button texto="Login" tipo="submit" disabilitado={!validarForm()} />
         </form>
 
         <div className="rodape_paginaPublica">

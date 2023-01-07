@@ -33,6 +33,7 @@ body,
     display: block;
   }
 }
+
 input{
   &::placeholder{
     // chorme, opera, safari, farefox
@@ -47,6 +48,14 @@ input{
   }
 }
 
+.MensagemValidacao{
+  display: block;
+  color: $vermelho;
+  font-size: 90%;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
 .oculto {
   display: none;
 }
@@ -54,3 +63,4 @@ input{
   border-radius: 50%;
   object-fit: cover;
 }
+
