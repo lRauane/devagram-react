@@ -2,7 +2,7 @@ import comAutorizacao from "../../hoc/comAutorizacao"
 
 function Home(){
   return(
-    <h1>Tela de home</h1>
+    <h1>home</h1>
   )
 }
 
