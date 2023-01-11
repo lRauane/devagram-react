@@ -13,7 +13,7 @@ import usuarioServices from "../../services/UsuarioServices";
 
 const UsuarioServices = new usuarioServices();
 
-export default function Login() {
+export default function Login({aposAutenticacao}) {
 
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
@@ -39,9 +39,11 @@ export default function Login() {
         login: email,
         senha
     });
-      alert("sucesso")
 
-      // redirecionar usuario para home
+      if(aposAutenticacao){
+        aposAutenticacao();
+      }
+
     } catch (e) {
       alert("Erro ao realizar o login." + e?.response?.data?.erro)
     }
