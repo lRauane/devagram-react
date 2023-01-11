@@ -2,6 +2,8 @@
 @import "paginaPublica.scss";
 @import "../pages/Cadastro/cadastro.scss";
 @import "../components/InputPublico/inputPublico.scss";
+@import "../components/Layout/Header.scss";
+@import "../components/Layout/Footer.scss";
 @import "../public/Fontes/fonts.scss";
 @import "../components/Button/button.scss";
 
@@ -62,5 +64,17 @@ input{
 .avatar {
   border-radius: 50%;
   object-fit: cover;
+}
+.navBar{
+  ul{
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 10px 0px;
+    li{
+      list-style: none;
+      cursor: pointer;
+    }
+  }
 }
 

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import usuarioServices from "../services/UsuarioServices";
 
@@ -17,7 +18,8 @@ export default function comAutorizacao(Componente) {
       return (
         <>
         <Header />
-          <Componente {...props} />;
+        <Componente {...props} />;
+        <Footer />
         </>
       );
     }
