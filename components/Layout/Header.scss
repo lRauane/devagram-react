@@ -14,7 +14,7 @@
       display: flex;
       align-items: center;
       position: relative;
-      flex: 1;
+      flex:0.5;
       margin-left: 16px;
       .container__ImagemLupa{
         position: absolute;
@@ -39,6 +39,37 @@
       }
     }
   }
+
+  .resultadoPesquisa__container{
+    position: absolute;
+    background-color: $branco1;
+    width: 100%;
+    z-index: 9;
+    .resultadoPesquisa{
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+
+      &:hover{
+        background-color: $cinza0;
+      }
+
+      .avatar{
+        height: 40px;
+        width: 40px;
+        margin-right: 8px;
+      }
+
+      .infoUser{
+        > * {
+          display: block;
+          font-size: 14px;
+          color: $cinza4;
+        }
+      }
+    }
+  }
+
 
   @media screen and (min-width: $desktopBreakPoint) {
     background-color: $branco1;
@@ -71,5 +102,16 @@
       }
     }
 
+    .resultadoPesquisa__container{
+      width: 26%;
+      margin: auto;
+      cursor: pointer;
+      right: 0;
+      left: 7%;
+      box-shadow: 0px 3px 5px $cinza1;
+      .resultadoPesquisa{
+        border-bottom: 1px solid $cinza1;
+      }
+    }
   }
 }
