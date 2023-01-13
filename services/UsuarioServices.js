@@ -14,13 +14,17 @@ export default class usuarioServices extends httpServices{
     if(usuario.data.avatar){
       localStorage.setItem("Avatar", usuario.data.avatar);
     };
-  }
+  };
 
   async cadastro(dados){
     return this.post('/cadastro', dados);
-  }
+  };
 
   estaAutenticado(){
     return localStorage.getItem('token') !== null;
   };
+
+  async pesquisa(termoPesquisa){
+    return this.get('/pesquisa?filtro=' + termoPesquisa);
+  }
 };
