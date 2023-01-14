@@ -1,21 +1,20 @@
 .feedContainer {
   padding-bottom: 60px;
   background-color: $branco1;
-  margin-top: 8px;
 
   .postagem {
-   
+    .avatar {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+    }
+    margin-top: 8px;
     margin-bottom: 8px;
 
     .cabecalho__post {
       display: flex;
       align-items: center;
       padding: 10px;
-      .avatar {
-        width: 40px;
-        height: 40px;
-        margin-right: 8px;
-      }
       strong {
         font-size: 14px;
         color: $cinza4;
@@ -34,10 +33,10 @@
     .rodape__postagem {
       padding: 5px 16px;
 
-      .comentarios__postagem{
+      .comentarios__postagem {
         border-top: 1px solid $cinza1;
         margin-top: 3px;
-        .comentario{
+        .comentario {
           margin-top: 5px;
         }
       }
@@ -48,35 +47,60 @@
         color: $cinza4;
       }
 
-      p.descricaoPost__descricao{
+      p.descricaoPost__descricao {
         font-size: 12px;
         margin: 0 0 4px;
         color: $cinza4;
 
+        .exibirDescricao__descricao {
+          font-size: 12px;
+          color: $corprimaria3;
+          margin-left: 3px;
+          cursor: pointer;
+        }
       }
 
-      .acoesRodape__postagem{
+      .acoesRodape__postagem {
         display: flex;
         align-items: center;
         margin-bottom: 5px;
 
-        > img{
+        > img {
           margin-right: 5px !important;
         }
-        .quantidadeCurtidas__postagem{
+        .quantidadeCurtidas__postagem {
           font-family: $fontLight;
           font-size: 12px;
           color: $cinza4;
-          strong{
+          strong {
             font-size: 12px;
             color: $cinza4;
           }
         }
       }
     }
+
+    .fazerComentario__container {
+      display: flex;
+      padding: 0 9px;
+      align-items: center;
+      margin-bottom: 16px;
+
+      textarea{
+        resize: none;
+        flex: 1;
+        font-size: 12px;
+        max-width: 100%;
+        border: none;
+        outline: none;
+        color: $cinza2;
+      }
+    }
   }
 
   @media screen and (min-width: $desktopBreakPoint) {
-   padding-bottom: 10px;
+    .postagem {
+      padding-top: 10px;
+    }
   }
 }
