@@ -17,9 +17,10 @@ export default class httpServices{
 
   post(url, data){
     return this.axios.post(url, data);
-  }
+  };
 
   get(url){
     return this.axios.get(url);
-  }
+  };
+
 }

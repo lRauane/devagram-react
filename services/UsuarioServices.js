@@ -27,4 +27,12 @@ export default class usuarioServices extends httpServices{
   async pesquisa(termoPesquisa){
     return this.get('/pesquisa?filtro=' + termoPesquisa);
   }
+
+  obterInfoUser(){
+    return {
+      id: localStorage.getItem('id'),
+      nome: localStorage.getItem('nome'),
+      avatar: localStorage.getItem('avatar')
+    }
+  }
 };

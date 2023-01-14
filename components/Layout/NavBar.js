@@ -94,5 +94,5 @@ export default function NavBar({ className }) {
         </li>
       </ul>
     </nav>
-  );
+  )
 }

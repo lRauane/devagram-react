@@ -37,7 +37,7 @@ export default function Header() {
   };
 
   const redirecionaHome = () =>{
-    router.push('/');
+    router.push('/')
   }
 
   return (
@@ -77,5 +77,5 @@ export default function Header() {
         </div>
       )}
     </header>
-  );
+  )
 }

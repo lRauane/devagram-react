@@ -1,0 +1,82 @@
+.feedContainer {
+  padding-bottom: 60px;
+  background-color: $branco1;
+  margin-top: 8px;
+
+  .postagem {
+   
+    margin-bottom: 8px;
+
+    .cabecalho__post {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      .avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+      }
+      strong {
+        font-size: 14px;
+        color: $cinza4;
+      }
+    }
+
+    .foto__Postagem {
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 370px;
+        object-fit: cover;
+      }
+    }
+
+    .rodape__postagem {
+      padding: 5px 16px;
+
+      .comentarios__postagem{
+        border-top: 1px solid $cinza1;
+        margin-top: 3px;
+        .comentario{
+          margin-top: 5px;
+        }
+      }
+      strong.nomeUsuario__descricao {
+        font-size: 12px;
+        margin-right: 4px;
+        float: left;
+        color: $cinza4;
+      }
+
+      p.descricaoPost__descricao{
+        font-size: 12px;
+        margin: 0 0 4px;
+        color: $cinza4;
+
+      }
+
+      .acoesRodape__postagem{
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+
+        > img{
+          margin-right: 5px !important;
+        }
+        .quantidadeCurtidas__postagem{
+          font-family: $fontLight;
+          font-size: 12px;
+          color: $cinza4;
+          strong{
+            font-size: 12px;
+            color: $cinza4;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakPoint) {
+   padding-bottom: 10px;
+  }
+}

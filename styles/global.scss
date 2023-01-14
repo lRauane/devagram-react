@@ -4,12 +4,25 @@
 @import "../components/InputPublico/inputPublico.scss";
 @import "../components/Layout/Header.scss";
 @import "../components/Layout/Footer.scss";
+@import "../components/Feed/feed.scss";
 @import "../public/Fontes/fonts.scss";
 @import "../components/Button/button.scss";
 
 * {
   font-family: $fontRegular;
   font-size: 14px;
+}
+body{
+  @media screen and (min-width: $desktopBreakPoint) {
+   background-color: $cinza5;
+   background-image: url('../public/Imagens/imagemDeFundoDesktop.svg');
+  }
+}
+.largura{
+  @media screen and (min-width: $desktopBreakPoint) {
+    width:35%;
+    margin: auto;
+  }
 }
 
 html,
