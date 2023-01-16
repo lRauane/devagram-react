@@ -12,7 +12,7 @@ import FazerComentario from "./FazerComentario";
 
 const TamanhoLimiteDescricao = 90;
 
-export default function Postagem({ usuario, fotoPost, descricao, comentario, usuarioLogado }) {
+export default function Postagem({ usuario, fotoPost, descricao, comentarios, usuarioLogado }) {
 
   const [TamanhoAtualDescricao, SetTamanhoAtualDescricao] = useState(
     TamanhoLimiteDescricao
@@ -82,7 +82,7 @@ export default function Postagem({ usuario, fotoPost, descricao, comentario, usu
         </div>
 
         <div className="comentarios__postagem">
-          {comentario.map((comentario, i) => (
+          {comentarios.map((comentario, i) => (
             <div className="comentario" key={i}>
               <strong className="nomeUsuario__descricao">
                 {comentario.nome}

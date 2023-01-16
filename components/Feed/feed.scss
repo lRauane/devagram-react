@@ -86,7 +86,7 @@
       align-items: center;
       margin-bottom: 16px;
 
-      textarea{
+      textarea {
         resize: none;
         flex: 1;
         font-size: 12px;
@@ -100,6 +100,30 @@
 
   @media screen and (min-width: $desktopBreakPoint) {
     .postagem {
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+
+      .rodape__postagem{
+        .acoesRodape__postagem{
+          > img{
+            cursor: pointer;
+          }
+        }
+      }
+      .fazerComentario__container {
+        margin-top: 12px;
+        .btn-publicacao {
+          background-color: transparent;
+          color: $corPrimaria1;
+          border: none;
+          outline: none;
+          font-size: 12px;
+          cursor: pointer;
+        }
+      }
+
       padding-top: 10px;
     }
   }

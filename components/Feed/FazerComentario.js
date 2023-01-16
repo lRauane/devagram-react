@@ -5,6 +5,7 @@ export default function FazerComentario({usuarioLogado}){
     <div className="fazerComentario__container">
       <Avatar src={usuarioLogado.avatar}/>
       <textarea rows={1} placeholder="Adicione um comentário..."></textarea>
+      <button className="btn-publicacao desktop" type="button">Publicar</button>
     </div>
   )
 }
