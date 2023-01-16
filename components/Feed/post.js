@@ -8,12 +8,15 @@ import Curtido from "../../public/Imagens/curtido.svg";
 import ComentarioAtivo from "../../public/Imagens/comentarioAtivo.svg";
 import ComentarioCinza from "../../public/Imagens/comentarioCinza.svg";
 import FazerComentario from "./FazerComentario";
-
+import FeedService from "../../services/FeedService";
 
 const TamanhoLimiteDescricao = 90;
+const feedService = new FeedService()
 
-export default function Postagem({ usuario, fotoPost, descricao, comentarios, usuarioLogado }) {
+export default function Postagem({id, usuario, fotoPost, descricao, comentarios, usuarioLogado, curtidas }) {
 
+  const [curtidasPostagem, setCurtidasPostagem] = useState(curtidas)
+  const [comentariosPostagem, setComentariosPostagem] = useState(comentarios)
   const [TamanhoAtualDescricao, SetTamanhoAtualDescricao] = useState(
     TamanhoLimiteDescricao
   );
@@ -33,6 +36,60 @@ export default function Postagem({ usuario, fotoPost, descricao, comentarios, us
     return mensagem;
   }
 
+  const ObterImagemComentario = () =>{
+    return exibirSessaoComentario
+    ? ComentarioAtivo 
+    : ComentarioCinza;
+  }
+
+  const comentar = async (comentario) =>{
+    console.log('fazer comentario');
+    try {
+      await feedService.adicionarComentario(id, comentario);
+      setexibirSessaoComentario(false);
+      setComentariosPostagem([
+        ...comentariosPostagem,
+        {
+          nome: usuarioLogado.nome,
+          mensagem: comentario
+        }
+      ])
+      return true
+    } catch (e) {
+      alert("Erro ao fazer comentario" + (e?.response?.data?.erro || ''));
+    }
+  }
+  
+  const usuarioLogadoCurtiuPostagem =() =>{
+    return curtidasPostagem.includes(usuarioLogado.id);
+  }
+
+  const AlterarCurtida = async () =>{
+    try {
+      await feedService.alterarCurtida(id);
+      // Tira o usuario logado da lista de curtidas
+      if(usuarioLogadoCurtiuPostagem()){
+        setCurtidasPostagem(
+          curtidasPostagem.filter(idUserCurtiu => idUserCurtiu !== usuarioLogado.id)
+        )
+      } else{
+        // add o usuario da lista de curtidas
+        setCurtidasPostagem([
+          ...curtidasPostagem,
+          usuarioLogado.id
+        ])
+      }
+    } catch (e) {
+      alert("Erro ao curtir" + (e?.response?.data?.erro || ''));
+    }
+  }
+
+  const ObterImagemCurtida = () =>{
+    return usuarioLogadoCurtiuPostagem()
+    ? Curtido
+    : CurtirImg
+  }
+
   return (
     <div className="postagem">
       <Link href={`/Perfil/${usuario.id}`}>
@@ -49,20 +106,20 @@ export default function Postagem({ usuario, fotoPost, descricao, comentarios, us
       <div className="rodape__postagem">
         <div className="acoesRodape__postagem">
           <Image
-            src={CurtirImg}
+            src={ObterImagemCurtida()}
             alt="icone curtir"
             width={20}
-            onClick={() => console.log("curtir")}
+            onClick={AlterarCurtida}
           />
           <Image
-            src={ComentarioCinza}
+            src={ObterImagemComentario()}
             alt="icone comentar"
             width={20}
             onClick={() => setexibirSessaoComentario(!exibirSessaoComentario)}
           />
 
           <span className="quantidadeCurtidas__postagem">
-            Curtido por <strong>1200 pessoas</strong>
+            Curtido por <strong>{curtidasPostagem.length} pessoas</strong>
           </span>
         </div>
         <div className="descricao__postagem">
@@ -82,7 +139,7 @@ export default function Postagem({ usuario, fotoPost, descricao, comentarios, us
         </div>
 
         <div className="comentarios__postagem">
-          {comentarios.map((comentario, i) => (
+          {comentariosPostagem.map((comentario, i) => (
             <div className="comentario" key={i}>
               <strong className="nomeUsuario__descricao">
                 {comentario.nome}
@@ -94,7 +151,7 @@ export default function Postagem({ usuario, fotoPost, descricao, comentarios, us
       </div>
 
       {exibirSessaoComentario &&
-      <FazerComentario usuarioLogado={usuarioLogado}/>
+      <FazerComentario comentar={comentar} usuarioLogado={usuarioLogado}/>
       }
     </div>
   );

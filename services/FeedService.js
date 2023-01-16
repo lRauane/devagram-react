@@ -10,4 +10,14 @@ export default class FeedService extends httpServices{
     }
     return this.get(url);
   }
+
+  async adicionarComentario(idPostagem, comentario){
+    return this.put(`/comentarios?id=${idPostagem}`, {
+      comentario
+    });
+  }
+
+  async alterarCurtida(idPostagem){
+    return this.put(`/like?id=${idPostagem}`)
+  }
 }
