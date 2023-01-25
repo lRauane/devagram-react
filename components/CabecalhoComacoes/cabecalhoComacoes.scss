@@ -1,0 +1,14 @@
+.header__comAcoes{
+  display: flex;
+  align-items: center;
+  border-bottom: 0.5px solid $cinza1;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  h3{
+    font-family: $fontBold;
+    font-size: 16px;
+    text-align: center;
+    flex: 1;
+  }
+}

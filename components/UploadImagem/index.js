@@ -15,7 +15,7 @@ export default function UploadImagem({
     }
 
     aoSetarAReferencia(referenciaInput?.current);
-  }, [referenciaInput?.current]);
+  }, [aoSetarAReferencia]);
 
   const abrirSeletorArquivos = () => {
     referenciaInput?.current?.click();

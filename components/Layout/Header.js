@@ -14,6 +14,11 @@ export default function Header() {
   const [termoPesquisado, setTermoPesquisado] = useState("");
   const router = useRouter();
 
+  let classNameHeader = ''
+  if(window && window.location.pathname !== '/'){
+    classNameHeader = 'desktop'
+  }
+
   const aoPesquisar = async (e) => {
     setTermoPesquisado(e.target.value);
     setResultadoPesquisa([]);
@@ -41,7 +46,7 @@ export default function Header() {
   }
 
   return (
-    <header className="home__headerPrincipal">
+    <header className={`home__headerPrincipal ${classNameHeader}`}>
       <div className="home__headerConteudoPrincipal">
         <div className="logo__headerPrincipal">
           <Image onClick={redirecionaHome} src={LogoHorizontal} alt="Logo Devagram" layout="fill" />
