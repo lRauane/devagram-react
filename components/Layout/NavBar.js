@@ -21,13 +21,13 @@ const mapaRotas = {
   },
   perfil: {
       imagemAtivo: usuarioAtivo,
-      rotasAtivacao: ['/Perfil/eu', '/Perfil/editar'],
+      rotasAtivacao: ['/perfil/eu', 'perfil/editar'],
       imagemPadrao: usuarioCinza
   }
 }
 
 export default function NavBar({ className }) {
-  const [rotaAtiva, setRotaAtiva] = useState('Home');
+  const [rotaAtiva, setRotaAtiva] = useState('home');
     const router = useRouter();
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function NavBar({ className }) {
         });
 
         if (indiceAtivo === -1) {
-            setRotaAtiva('Home');
+            setRotaAtiva('home');
         } else {
             setRotaAtiva(chavesDoMapaDeRotas[indiceAtivo]);
         }

@@ -7,43 +7,48 @@ import CurtirImg from "../../public/Imagens/curtir.svg";
 import Curtido from "../../public/Imagens/curtido.svg";
 import ComentarioAtivo from "../../public/Imagens/comentarioAtivo.svg";
 import ComentarioCinza from "../../public/Imagens/comentarioCinza.svg";
-import FazerComentario from "./FazerComentario";
+import { FazerComentario } from "./FazerComentario";
 import FeedService from "../../services/FeedService";
 
 const TamanhoLimiteDescricao = 90;
-const feedService = new FeedService()
+const feedService = new FeedService();
 
-export default function Postagem({id, usuario, fotoPost, descricao, comentarios, usuarioLogado, curtidas }) {
-
-  const [curtidasPostagem, setCurtidasPostagem] = useState(curtidas)
-  const [comentariosPostagem, setComentariosPostagem] = useState(comentarios)
+export default function Postagem({
+  id,
+  usuario,
+  fotoPost,
+  descricao,
+  comentarios,
+  usuarioLogado,
+  curtidas,
+}) {
+  const [curtidasPostagem, setCurtidasPostagem] = useState(curtidas);
+  const [comentariosPostagem, setComentariosPostagem] = useState(comentarios);
   const [TamanhoAtualDescricao, SetTamanhoAtualDescricao] = useState(
     TamanhoLimiteDescricao
   );
-  const [exibirSessaoComentario, setexibirSessaoComentario] = useState(false)
+  const [exibirSessaoComentario, setexibirSessaoComentario] = useState(false);
 
-  const exibirDescricaoCompleta =() =>{
+  const exibirDescricaoCompleta = () => {
     SetTamanhoAtualDescricao(Number.MAX_SAFE_INTEGER);
-  }
+  };
 
-  const DescricaoMaiorQueLimite = () =>{
+  const DescricaoMaiorQueLimite = () => {
     return descricao.length > TamanhoAtualDescricao;
-  }
+  };
 
-  const obterDescricao = () =>{
+  const obterDescricao = () => {
     let mensagem = descricao.substring(0, TamanhoAtualDescricao);
 
     return mensagem;
-  }
+  };
 
-  const ObterImagemComentario = () =>{
-    return exibirSessaoComentario
-    ? ComentarioAtivo 
-    : ComentarioCinza;
-  }
+  const ObterImagemComentario = () => {
+    return exibirSessaoComentario ? ComentarioAtivo : ComentarioCinza;
+  };
 
-  const comentar = async (comentario) =>{
-    console.log('fazer comentario');
+  const comentar = async (comentario) => {
+    console.log("fazer comentario");
     try {
       await feedService.adicionarComentario(id, comentario);
       setexibirSessaoComentario(false);
@@ -51,48 +56,46 @@ export default function Postagem({id, usuario, fotoPost, descricao, comentarios,
         ...comentariosPostagem,
         {
           nome: usuarioLogado.nome,
-          mensagem: comentario
-        }
-      ])
-      return true
+          mensagem: comentario,
+        },
+      ]);
+      return true;
     } catch (e) {
-      alert("Erro ao fazer comentario" + (e?.response?.data?.erro || ''));
+      alert("Erro ao fazer comentario" + (e?.response?.data?.erro || ""));
     }
-  }
-  
-  const usuarioLogadoCurtiuPostagem =() =>{
+  };
+
+  const usuarioLogadoCurtiuPostagem = () => {
     return curtidasPostagem.includes(usuarioLogado.id);
-  }
+}
 
-  const AlterarCurtida = async () =>{
+  const AlterarCurtida = async () => {
     try {
-      await feedService.alterarCurtida(id);
-      // Tira o usuario logado da lista de curtidas
-      if(usuarioLogadoCurtiuPostagem()){
-        setCurtidasPostagem(
-          curtidasPostagem.filter(idUserCurtiu => idUserCurtiu !== usuarioLogado.id)
-        )
-      } else{
-        // add o usuario da lista de curtidas
-        setCurtidasPostagem([
-          ...curtidasPostagem,
-          usuarioLogado.id
-        ])
-      }
+        await feedService.alterarCurtida(id);
+        if (usuarioLogadoCurtiuPostagem()) {
+            // tiro o usuario logado da lista de curtidas
+            setCurtidasPostagem(
+                curtidasPostagem.filter(idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id)
+            );
+        } else {
+            // adiciona o usuario logado na lista de curtidas
+            setCurtidasPostagem([
+                ...curtidasPostagem,
+                usuarioLogado.id
+            ]);
+        }
     } catch (e) {
-      alert("Erro ao curtir" + (e?.response?.data?.erro || ''));
+        alert(`Erro ao alterar a curtida! ` + (e?.response?.data?.erro || ''));
     }
-  }
+}
 
-  const ObterImagemCurtida = () =>{
-    return usuarioLogadoCurtiuPostagem()
-    ? Curtido
-    : CurtirImg
-  }
+  const ObterImagemCurtida = () => {
+    return usuarioLogadoCurtiuPostagem() ? Curtido : CurtirImg;
+  };
 
   return (
     <div className="postagem">
-      <Link href={`/Perfil/${usuario.id}`}>
+      <Link href={`perfil/${usuario.id}`}>
         <section className="cabecalho__post">
           <Avatar src={usuario.avatar} />
           <strong>{usuario.nome}</strong>
@@ -123,18 +126,19 @@ export default function Postagem({id, usuario, fotoPost, descricao, comentarios,
           </span>
         </div>
         <div className="descricao__postagem">
-          <Link href={`/Perfil/${usuario.id}`}>
+          <Link href={`/perfil/${usuario.id}`}>
             <strong className="nomeUsuario__descricao">{usuario.nome}</strong>
           </Link>
 
-          <p className="descricaoPost__descricao">{obterDescricao()}
-          {DescricaoMaiorQueLimite() && (
-            <span 
-            onClick={exibirDescricaoCompleta}
-            className="exibirDescricao__descricao">
-              ...mais
-            </span>
-          )}
+          <p className="descricaoPost__descricao">
+            {obterDescricao()}
+            {DescricaoMaiorQueLimite() && (
+              <span
+                onClick={exibirDescricaoCompleta}
+                className="exibirDescricao__descricao">
+                ...mais
+              </span>
+            )}
           </p>
         </div>
 
@@ -150,9 +154,9 @@ export default function Postagem({id, usuario, fotoPost, descricao, comentarios,
         </div>
       </div>
 
-      {exibirSessaoComentario &&
-      <FazerComentario comentar={comentar} usuarioLogado={usuarioLogado}/>
-      }
+      {exibirSessaoComentario && (
+        <FazerComentario comentar={comentar} usuarioLogado={usuarioLogado} />
+      )}
     </div>
   );
 }

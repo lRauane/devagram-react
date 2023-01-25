@@ -1,5 +1,5 @@
 import comAutorizacao from "../../hoc/comAutorizacao"
-import { Feed } from "../Feed";
+import Feed  from "../Feed";
 
 function Home({usuarioLogado}){
   return(

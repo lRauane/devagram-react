@@ -33,7 +33,7 @@ export default function Header() {
   const aoClicarResultadoPesquisa = (id) => {
     setResultadoPesquisa([]);
     setTermoPesquisado('');
-    router.push(`/Perfil/${id}`);
+    router.push(`/perfil/${id}`);
   };
 
   const redirecionaHome = () =>{

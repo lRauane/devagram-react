@@ -4,7 +4,7 @@ import Postagem from "./post";
 
 const feedService = new FeedService();
 
-export function Feed({ usuarioLogado }) {
+export default function  Feed({ usuarioLogado }) {
   const [listaPost, setListaPost] = useState([]);
 
   useEffect( ()  => {
@@ -30,6 +30,7 @@ export function Feed({ usuarioLogado }) {
       ));
       setListaPost(postagensFormatadas);
     }
+    
     user();
   }, [usuarioLogado]);
 

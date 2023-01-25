@@ -24,7 +24,6 @@ export default function FazerComentario({usuarioLogado, comentar}){
     comentar(comentario);
   }
 
-  
   return (
     <div className="fazerComentario__container">
       <Avatar src={usuarioLogado.avatar}/>
