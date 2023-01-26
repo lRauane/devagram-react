@@ -33,6 +33,20 @@ body,
   height: 100%;
   margin: 0;
 }
+a{
+  text-decoration: none;
+}
+.linhaDivisoria {
+  margin: 0;
+  border: none;
+  background-color: $cinza1;
+  height: 1px;
+
+  @media screen and (min-width: $desktopBreakPoint) {
+    margin: 0 auto;
+    width: 94%;
+  }
+}
 
 .desktop{
   @media screen and (min-width: $desktopBreakPoint) {

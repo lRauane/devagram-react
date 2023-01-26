@@ -28,6 +28,10 @@ export default class usuarioServices extends httpServices{
     return this.get('/pesquisa?filtro=' + termoPesquisa);
   }
 
+  async obterPerfil(idUsuario) {
+    return this.get(`/pesquisa?id=${idUsuario}`);
+}
+
   obterInfoUser(){
     return {
       id: localStorage.getItem('id'),

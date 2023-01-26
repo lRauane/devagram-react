@@ -5,26 +5,28 @@ import Avatar from "../Avatar";
 
 export default function HeaderPerfil({ usuario }) {
   return (
-    <div className="HeaderPerfil">
+    <div className="HeaderPerfil largura">
       <CabecalhoComAcoes
         iconeEsquerda={imgSetaEsquerda}
         titulo={usuario.nome}
       />
+
+      <hr className="linhaDivisoria"/>
 
       <div className="headerPerfil__statusPerfil">
         <Avatar src={usuario.avatar}/>
         <div className="statusPerfil__statusInformacoes">
           <div class="statusContainer">
             <div className="status">
-              <strong>150</strong>
+              <strong>{usuario.publicacoes}</strong>
               <span>Publicações</span>
             </div>
             <div className="status">
-              <strong>1500</strong>
+              <strong>{usuario.seguidores}</strong>
               <span>Seguidores</span>
             </div>
             <div className="status">
-              <strong>120</strong>
+              <strong>{usuario.seguindo}</strong>
               <span>Seguindo</span>
             </div>
           </div>

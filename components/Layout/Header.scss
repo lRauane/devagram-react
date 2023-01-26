@@ -71,10 +71,10 @@
     }
   }
 
-
   @media screen and (min-width: $desktopBreakPoint) {
     background-color: $branco1;
     border: none;
+    margin-bottom: 20px;
 
     .home__headerConteudoPrincipal{
       max-width: 60%;
