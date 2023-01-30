@@ -1,73 +1,70 @@
 .paginaPerfil {
-  .HeaderPerfil {
-      background-color: $branco1;
+    .cabecalhoPerfil {
+        background-color: $branco1;
+        .statusPerfil {
+            display: flex;
+            align-items: center;
+            padding: 16px 16px 24px;
 
-      .headerPerfil__statusPerfil {
-          display: flex;
-          align-items: center;
-          padding: 16px 16px 24px;
+            .avatar {
+                height: 85px;
+                width: 85px;
+                margin-right: 24px;
+            }
+        
+            .informacoesPerfil {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
 
-          .avatar {
-              height: 85px;
-              width: 85px;
-              margin-right: 24px;
-          }
-      
-          .statusPerfil__statusInformacoes {
-              flex: 1;
-              display: flex;
-              flex-direction: column;
+                .btn {
+                    margin-top: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    border-radius: 4px;
+                }
 
-              .btn {
-                  margin-top: 12px;
-                  padding: 6px;
-                  font-size: 12px;
-                  border-radius: 4px;
-              }
+                .statusContainer {
+                    display: flex;
+                    justify-content: space-around;
 
-              .statusContainer {
-                  display: flex;
-                  justify-content: space-around;
+                    .status {
+                        text-align: center;
 
-                  .status {
-                      text-align: center;
+                        > strong {
+                            font-size: 14px;
+                            display: block;
+                        }
 
-                      > strong {
-                          font-size: 14px;
-                          display: block;
-                      }
+                        > span {
+                            font-size: 12px;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-                      > span {
-                          font-size: 12px;
-                          display: block;
-                      }
-                  }
-              }
-          }
-      }
-  }
-
+    
   @media screen and (min-width: $desktopBreakPoint) {
-      .HeaderPerfil {
-          .header__comAcoes {
-              > span {
-                  display: none !important;
-              }
-          }
-          
-          .headerPerfil__statusPerfil {
-              .avatar {
-                  width: 90px;
-                  height: 90px;
-              }
-
-              .statusPerfil__statusInformacoes {
-                  .btn {
-                      padding: 8px;
-                  }
-              }
-          }
-      }
-
+    .cabecalhoPerfil{
+        .cabecalhoComAcoes{
+            > img {
+                display: none !important;
+            }
+        }
+        .statusPerfil{
+            .avatar{
+                width: 80px;
+                height: 80px;
+            }
+            .informacoesPerfil{
+                .btn{
+                    padding: 8px;
+                }
+            }
+        }
+    }
   }
 }
