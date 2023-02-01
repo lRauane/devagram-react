@@ -31,6 +31,10 @@ export default class usuarioServices extends httpServices {
     return this.get(`/pesquisa?id=${idUsuario}`);
   }
 
+  async alternarSeguir(idUsuario){
+    return this.put(`/seguir?id=${idUsuario}`)
+  }
+
   obterInfoUser() {
     return {
       id: localStorage.getItem("id"),

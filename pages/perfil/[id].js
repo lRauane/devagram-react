@@ -13,11 +13,18 @@ function Perfil({ usuarioLogado }) {
 
   const obterPerfil = async (idUsuario) =>{
     try {
-     const {data} = await UsuarioService.obterPerfil(idUsuario)
+     const {data} = await UsuarioService.obterPerfil(
+      estaNoPerfilPessoal()?
+      usuarioLogado.id : idUsuario
+     )
      return data;
     } catch (error) {
       alert("erro ao obter o perfil do usuario")
     }
+  }
+
+  const estaNoPerfilPessoal = () =>{
+    return router.query.id === 'eu';
   }
 
   useEffect(() => {
@@ -29,15 +36,20 @@ function Perfil({ usuarioLogado }) {
       setUsuario(dadosPerfil);
     }
     fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.id]);
 
   return (
     <div className="paginaPerfil">
-      <CabecalhoPerfil usuarioLogado={usuarioLogado} usuario={usuario} />
+      <CabecalhoPerfil 
+      usuarioLogado={usuarioLogado} 
+      usuario={usuario} 
+      estaNoPerfilPessoal={estaNoPerfilPessoal()}
+      />
 
       <Feed 
       usuarioLogado={usuarioLogado}
-      idUsuario={usuario?._id} 
+      idUsuario={usuario}
       />
     </div>
   );

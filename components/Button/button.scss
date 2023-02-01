@@ -1,8 +1,9 @@
-@mixin botaoPrimario{
+@mixin botaoPrimario {
   background-color: $corPrimaria1;
-    color: $branco1;
+  color: $branco1;
 }
-@mixin botaoOutline{
+
+@mixin botaoInvertido {
   background-color: $branco1;
   color: $corPrimaria1;
   border: 1px solid $corPrimaria1;
@@ -15,22 +16,22 @@
   cursor: pointer;
 
   &.primaria {
-    @include botaoPrimario;
+      @include botaoPrimario;
 
-    &:hover {
-      @include botaoOutline;
-    }
+      &:hover {
+          @include botaoInvertido;
+      }
   }
 
-  &.outline {
-    @include botaoOutline;
-    &:hover {
-      @include botaoPrimario;
-    }
+  &.invertido {
+      @include botaoInvertido;
+
+      &:hover {
+          @include botaoPrimario;
+      }
   }
 
   &:disabled {
-    cursor: no-drop;
-    opacity: 0.5;
+      opacity: 0.5;
   }
 }
