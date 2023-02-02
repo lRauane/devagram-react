@@ -48,7 +48,6 @@ export default function Postagem({
   };
 
   const comentar = async (comentario) => {
-    console.log("fazer comentario");
     try {
       await feedService.adicionarComentario(id, comentario);
       setexibirSessaoComentario(false);
@@ -59,7 +58,6 @@ export default function Postagem({
           mensagem: comentario,
         },
       ]);
-      return true;
     } catch (e) {
       alert("Erro ao fazer comentario" + (e?.response?.data?.erro || ""));
     }

@@ -16,7 +16,7 @@ function Perfil({ usuarioLogado }) {
      const {data} = await UsuarioService.obterPerfil(
       estaNoPerfilPessoal()?
       usuarioLogado.id : idUsuario
-     )
+     );
      return data;
     } catch (error) {
       alert("erro ao obter o perfil do usuario")
@@ -36,7 +36,6 @@ function Perfil({ usuarioLogado }) {
       setUsuario(dadosPerfil);
     }
     fetchData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.id]);
 
   return (
@@ -49,7 +48,7 @@ function Perfil({ usuarioLogado }) {
 
       <Feed 
       usuarioLogado={usuarioLogado}
-      idUsuario={usuario}
+      usuarioPerfil={usuario}
       />
     </div>
   );
