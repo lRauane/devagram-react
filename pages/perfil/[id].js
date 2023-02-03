@@ -14,8 +14,10 @@ function Perfil({ usuarioLogado }) {
   const obterPerfil = async (idUsuario) =>{
     try {
      const {data} = await UsuarioService.obterPerfil(
-      estaNoPerfilPessoal()?
-      usuarioLogado.id : idUsuario
+      estaNoPerfilPessoal()
+      ?
+      usuarioLogado.id 
+      : idUsuario
      );
      return data;
     } catch (error) {

@@ -31,6 +31,7 @@ export default function CabecalhoComAcoes({
             {elementoDireita && (
                 <button
                     type='button'
+                    className="btn-acoesDireita"
                 >
                     {elementoDireita}
                 </button>

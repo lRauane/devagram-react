@@ -35,6 +35,13 @@ export default class usuarioServices extends httpServices {
     return this.put(`/seguir?id=${idUsuario}`)
   }
 
+  async logout(){
+    localStorage.removeItem("nome");
+    localStorage.removeItem("email");
+    localStorage.removeItem("token")
+    localStorage.removeItem("id");
+    localStorage.removeItem("Avatar");
+  }  
   obterInfoUser() {
     return {
       id: localStorage.getItem("id"),
