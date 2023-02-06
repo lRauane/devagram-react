@@ -5,5 +5,4 @@ const nextConfig = {
     incluidePaths: [path.join(__dirname, 'styles')]
   }
 }
-
 module.exports = nextConfig

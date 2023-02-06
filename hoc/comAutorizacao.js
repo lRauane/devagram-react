@@ -20,7 +20,7 @@ export default function comAutorizacao(Componente) {
       return (
         <>
         <Header usuarioLogado={usuarioLogado}/>
-        <Componente usuarioLogado={usuarioLogado} {...props} />;
+        <Componente usuarioLogado={usuarioLogado} {...props} />
         <Footer usuarioLogado={usuarioLogado}/>
         </>
       );

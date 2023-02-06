@@ -19,6 +19,10 @@ export default class usuarioServices extends httpServices {
     return this.post("/cadastro", dados);
   }
 
+  async atualizarPerfil(dados){
+    return this.put('/usuario', dados)
+  }
+
   estaAutenticado() {
     return localStorage.getItem("token") !== null;
   }
