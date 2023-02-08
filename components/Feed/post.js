@@ -50,7 +50,7 @@ export default function Postagem({
   const comentar = async (comentario) => {
     try {
       await feedService.adicionarComentario(id, comentario);
-      setexibirSessaoComentario(false);
+      setDeveExibirSecaoParaComentar(false);
       setComentariosPostagem([
         ...comentariosPostagem,
         {
@@ -59,33 +59,32 @@ export default function Postagem({
         },
       ]);
     } catch (e) {
-      alert("Erro ao fazer comentario" + (e?.response?.data?.erro || ""));
+      alert(`Erro ao fazer comentario! ` + (e?.response?.data?.erro || ""));
     }
   };
 
   const usuarioLogadoCurtiuPostagem = () => {
     return curtidasPostagem.includes(usuarioLogado.id);
-}
+  };
 
   const AlterarCurtida = async () => {
     try {
-        await feedService.alterarCurtida(id);
-        if (usuarioLogadoCurtiuPostagem()) {
-            // tiro o usuario logado da lista de curtidas
-            setCurtidasPostagem(
-                curtidasPostagem.filter(idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id)
-            );
-        } else {
-            // adiciona o usuario logado na lista de curtidas
-            setCurtidasPostagem([
-                ...curtidasPostagem,
-                usuarioLogado.id
-            ]);
-        }
+      await feedService.alterarCurtida(id);
+      if (usuarioLogadoCurtiuPostagem()) {
+        // tiro o usuario logado da lista de curtidas
+        setCurtidasPostagem(
+          curtidasPostagem.filter(
+            (idUsuarioQueCurtiu) => idUsuarioQueCurtiu !== usuarioLogado.id
+          )
+        );
+      } else {
+        // adiciona o usuario logado na lista de curtidas
+        setCurtidasPostagem([...curtidasPostagem, usuarioLogado.id]);
+      }
     } catch (e) {
-        alert(`Erro ao alterar a curtida! ` + (e?.response?.data?.erro || ''));
+      alert(`Erro ao alterar a curtida! ` + (e?.response?.data?.erro || ""));
     }
-}
+  };
 
   const ObterImagemCurtida = () => {
     return usuarioLogadoCurtiuPostagem() ? Curtido : CurtirImg;

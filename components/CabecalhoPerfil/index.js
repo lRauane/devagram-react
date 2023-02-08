@@ -88,7 +88,7 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
         titulo={usuario.nome}
         elementoDireita={obterElementoDireita()}
       />
-
+      
       <hr className="linhaDivisoria" />
 
       <div className="statusPerfil">

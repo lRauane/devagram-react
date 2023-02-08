@@ -103,7 +103,7 @@
     padding-top: 8px;
     margin-top: 0px;
     .postagem {
-      .cabecalho__post{
+      .cabecalho__post {
         cursor: pointer;
       }
       .avatar {
@@ -111,9 +111,13 @@
         height: 42px;
       }
 
-      .rodape__postagem{
-        .acoesRodape__postagem{
-          > img{
+      .rodape__postagem {
+        .comentarios__postagem {
+          max-height: 100px;
+          overflow-y: auto;
+        }
+        .acoesRodape__postagem {
+          > img {
             cursor: pointer;
           }
         }

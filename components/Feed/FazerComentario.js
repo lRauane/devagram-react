@@ -31,6 +31,7 @@ export default function FazerComentario({usuarioLogado, comentar}){
       onKeyDown={AoPressionarTecla}
       rows={rows} 
       value={comentario}
+      autoFocus={true}
       onChange={AoDigitarComentario} placeholder="Adicione um comentário..."></textarea>
       <button className="btn-publicacao desktop" type="button" onClick={FazerComentario}>Publicar</button>
     </div>
