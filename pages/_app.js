@@ -1,14 +1,7 @@
-import "../styles/global.scss";
-import Head from "next/head";
+import '../styles/globals.scss'
 
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        <title>Devagram</title>
-        <link rel='icon' href='./public/Imagens/logo.svg' />
-      </Head>
-      <Component {...pageProps} />
-    </>
-  );
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
 }
+
+export default MyApp

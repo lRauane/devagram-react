@@ -13,6 +13,7 @@
     "axios": "^1.2.2",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
+    "eslint-plugin-react-hooks": "^5.0.0-next-fccf3a9fb-20230213",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

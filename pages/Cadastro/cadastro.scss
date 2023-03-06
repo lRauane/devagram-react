@@ -1,35 +1,35 @@
-.cadastro__Section{
-  .uploadImagemContainer{
-    text-align: center;
-    position: relative; 
-    margin-bottom: 48px;
-    cursor: pointer;
+.paginaCadastro {
+  .uploadImagemContainer {
+      text-align: center;
+      position: relative;
+      margin-bottom: 48px;
+      cursor: pointer;
 
-    .avatarPreview{
-      height: 120px;
-      width: 120px;
-    }
-
-    &::after{
-      content: url('/Imagens/camera.svg');
-      width: 48px;
-      height: 48px;
-      position: absolute;
-      right: 0;
-      margin: auto;
-      bottom: 0px;
-      left: 90px;
-    }
-  }
-
-  @media screen and (min-width: $desktopBreakPoint) {
-    .rodape_paginaPublica{
-      display: flex;
-      justify-content: center;
-      p{
-        margin-right:6px;
+      .avatarPreview {
+          height: 120px;
+          width: 120px;
       }
-    }
+
+      &::after {
+          content: url('/imagens/camera.svg');
+          width: 48px;
+          height: 48px;
+          position: absolute;
+          right: 0;
+          left: 90px;
+          bottom: 0px;
+          margin: auto;
+      }
   }
 
+  @media screen and (min-width: $desktopBreakpoint) {
+      .rodapePaginaPublica {
+          display: flex;
+          justify-content: center;
+          
+          p {
+              margin-right: 6px;
+          }
+      }
+  }
 }

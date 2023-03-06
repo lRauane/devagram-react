@@ -1,21 +1,21 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CabecalhoComAcoes from "../../components/cabecalhoComAcoes";
-import UploadImagem from "../../components/UploadImagem";
+import CabecalhoComAcoes from "../../componentes/cabecalhoComAcoes";
+import UploadImagem from "../../componentes/uploadImagem";
 import comAutorizacao from "../../hoc/comAutorizacao";
-import imgAvatarPadrao from "../../public/Imagens/avatar.svg";
-import imgLimparNome from "../../public/Imagens/limpar.svg";
-import usuarioServices from "../../services/UsuarioServices";
+import imgAvatarPadrao from "../../public/imagens/avatar.svg";
+import imgLimpar from "../../public/imagens/limpar.svg";
+import UsuarioService from "../../services/UsuarioService";
 import { validarNome } from "../../utils/validadores";
 
-const UsuarioServices = new usuarioServices();
+const usuarioService = new UsuarioService();
 
 function EditarPerfil({ usuarioLogado }) {
-  const router = useRouter();
   const [avatar, setAvatar] = useState();
-  const [inputUploadAvatar, setInputUploadAvatar] = useState();
   const [nome, setNome] = useState("");
+  const [inputAvatar, setInputAvatar] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     if (!usuarioLogado) {
@@ -31,7 +31,8 @@ function EditarPerfil({ usuarioLogado }) {
   const atualizarPerfil = async () => {
     try {
       if (!validarNome(nome)) {
-        alert("Nome precisa de pelo menos 2 caracteres");
+        alert("Nome precisa de pelo menos 2 caracteres!");
+        return;
       }
 
       const corpoRequisicao = new FormData();
@@ -41,16 +42,16 @@ function EditarPerfil({ usuarioLogado }) {
         corpoRequisicao.append("file", avatar.arquivo);
       }
 
-      await UsuarioServices.atualizarPerfil(corpoRequisicao);
-
+      await usuarioService.atualizarPerfil(corpoRequisicao);
       localStorage.setItem("nome", nome);
-      if(avatar.arquivo){
-        localStorage.setItem("avatar", avatar.preview)
-      }
-      router.push("/perfil/eu")
 
+      if (avatar.arquivo) {
+        localStorage.setItem("avatar", avatar.preview);
+      }
+
+      router.push("/perfil/eu");
     } catch (error) {
-      alert("Erro ao editar perfil");
+      alert(`Erro ao editar perfil!`);
     }
   };
 
@@ -59,44 +60,47 @@ function EditarPerfil({ usuarioLogado }) {
   };
 
   const abrirSeletorDeArquivos = () => {
-    inputUploadAvatar?.click();
+    inputAvatar?.click();
   };
 
   return (
-    <div className="paginaEditarPerfil largura">
-      <div className="paginaEditarPerfil__Conteudo">
+    <div className="paginaEditarPerfil largura30pctDesktop">
+      <div className="conteudoPaginaEditarPerfil">
         <CabecalhoComAcoes
           titulo={"Editar perfil"}
           aoClicarAcaoEsquerda={aoCancelarEdicao}
-          textoEsquerda={"Cancelar"}
+          textoEsquerda="Cancelar"
           elementoDireita={"Concluir"}
-          acaoElementoDireita={atualizarPerfil}
+          aoClicarElementoDireita={atualizarPerfil}
         />
 
         <hr className="linhaDivisoria" />
 
-        <div className="paginaEditarPerfil__edicaoAvatar">
+        <div className="edicaoAvatar">
           <UploadImagem
             setImagem={setAvatar}
             imagemPreview={avatar?.preview || imgAvatarPadrao.src}
             imagemPreviewClassName="avatar"
-            aoSetarAReferencia={setInputUploadAvatar}
+            aoSetarAReferencia={setInputAvatar}
           />
+
           <span onClick={abrirSeletorDeArquivos}>Alterar foto do perfil</span>
         </div>
 
         <hr className="linhaDivisoria" />
 
-        <div className="paginaEditarPerfil__editarNome">
+        <div className="edicaoNome">
           <label>Nome</label>
+
           <input
             type="text"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           />
+
           <Image
-            src={imgLimparNome}
-            alt="Icone de limpar nome"
+            src={imgLimpar}
+            alt="icone limpar"
             width={16}
             height={16}
             onClick={() => setNome("")}

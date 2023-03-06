@@ -1,52 +1,51 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-
-import Button from "../../components/Button";
-import Logo from "../../public/Imagens/logo.svg";
-import usuarioAtivo from "../../public/Imagens/usuarioAtivo.svg";
-import Envelope from "../../public/Imagens/envelope.svg";
-import Chave from "../../public/Imagens/chave.svg";
-import InputPublico from "../../components/InputPublico";
-import UploadImagem from "../../components/UploadImagem";
-import Avatar from "../../public/Imagens/avatar.svg";
-
+import Botao from "../../componentes/botao";
+import InputPublico from "../../componentes/inputPublico";
+import UploadImagem from "../../componentes/uploadImagem";
 import {
-  validarNome,
   validarEmail,
   validarSenha,
+  validarNome,
   validarConfirmacaoSenha,
 } from "../../utils/validadores";
-import usuarioServices from "../../services/UsuarioServices";
+import UsuarioService from "../../services/UsuarioService";
+
+import imagemLogo from "../../public/imagens/logo.svg";
+import imagemUsuarioAtivo from "../../public/imagens/usuarioAtivo.svg";
+import imagemEnvelope from "../../public/imagens/envelope.svg";
+import imagemChave from "../../public/imagens/chave.svg";
+import imagemAvatar from "../../public/imagens/avatar.svg";
 import { useRouter } from "next/router";
 
-const UsuarioServices = new usuarioServices();
+const usuarioService = new UsuarioService();
 
 export default function Cadastro() {
   const [imagem, setImagem] = useState(null);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [confirmaçãoSenha, setconfirmaçãoSenha] = useState("");
-  const [submetendo, setsubmetendo] = useState(false);
-  const Router = useRouter();
+  const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+  const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+  const router = useRouter();
 
-  const validarForm = () => {
+  const validarFormulario = () => {
     return (
       validarNome(nome) &&
       validarEmail(email) &&
       validarSenha(senha) &&
-      validarConfirmacaoSenha(senha, confirmaçãoSenha)
+      validarConfirmacaoSenha(senha, confirmacaoSenha)
     );
   };
 
-  const submeter = async (e) => {
+  const aoSubmeter = async (e) => {
     e.preventDefault();
-    if (!validarForm()) {
+    if (!validarFormulario()) {
       return;
     }
 
-    setsubmetendo(true);
+    setEstaSubmetendo(true);
 
     try {
       const corpoReqCadastro = new FormData();
@@ -57,88 +56,88 @@ export default function Cadastro() {
       if (imagem?.arquivo) {
         corpoReqCadastro.append("file", imagem.arquivo);
       }
-      await UsuarioServices.cadastro(corpoReqCadastro);
-      await UsuarioServices.login({
+
+      await usuarioService.cadastro(corpoReqCadastro);
+      await usuarioService.login({
         login: email,
-        senha
+        senha,
       });
 
-      Router.push('/');
-    } catch (e) {
-      alert(
-        "Erro ao cadastrar usuario. " + e?.response?.data?.erro
-    );
+      router.push("/");
+    } catch (error) {
+      alert("Erro ao cadastrar usuario. " + error?.response?.data?.erro);
     }
-    setsubmetendo(false);
+
+    setEstaSubmetendo(false);
   };
 
   return (
-    <section className={"cadastro__Section paginaPublica"}>
-      <div className="logo__Container desktop">
-        <Image
-          src={Logo}
-          alt="Logotipo Devagram"
-          layout="fill"
-          className="logo"
-        />
+    <section className={`paginaCadastro paginaPublica`}>
+      <div className="logoContainer desktop">
+        <Image src={imagemLogo} alt="logotipo" layout="fill" className="logo" />
       </div>
-      <div className="conteudo__paginaPublica">
-        <form onSubmit={submeter}>
+
+      <div className="conteudoPaginaPublica">
+        <form onSubmit={aoSubmeter}>
           <UploadImagem
             imagemPreviewClassName="avatar avatarPreview"
-            imagemPreview={imagem?.preview || Avatar.src}
+            imagemPreview={imagem?.preview || imagemAvatar.src}
             setImagem={setImagem}
           />
+
           <InputPublico
-            image={usuarioAtivo}
-            texto="Nome completo"
+            imagem={imagemUsuarioAtivo}
+            texto="Nome Completo"
             tipo="text"
             aoAlterarValor={(e) => setNome(e.target.value)}
             valor={nome}
             mensagemValidacao="O nome precisa de pelo menos 2 caracteres"
             exibirMensagemValidacao={nome && !validarNome(nome)}
           />
+
           <InputPublico
-            image={Envelope}
+            imagem={imagemEnvelope}
             texto="E-mail"
             tipo="email"
             aoAlterarValor={(e) => setEmail(e.target.value)}
             valor={email}
-            mensagemValidacao="E-mail informado não é válido"
+            mensagemValidacao="O e-mail informado é inválido"
             exibirMensagemValidacao={email && !validarEmail(email)}
           />
+
           <InputPublico
-            image={Chave}
+            imagem={imagemChave}
             texto="Senha"
             tipo="password"
             aoAlterarValor={(e) => setSenha(e.target.value)}
             valor={senha}
-            mensagemValidacao="A senha precisa ter pelo menos 3 caracteres!"
+            mensagemValidacao="Precisa de pelo menos 3 caracteres"
             exibirMensagemValidacao={senha && !validarSenha(senha)}
           />
+
           <InputPublico
-            image={Chave}
-            texto="Confirmar senha"
+            imagem={imagemChave}
+            texto="Confirmar Senha"
             tipo="password"
-            aoAlterarValor={(e) => setconfirmaçãoSenha(e.target.value)}
-            valor={confirmaçãoSenha}
+            aoAlterarValor={(e) => setConfirmacaoSenha(e.target.value)}
+            valor={confirmacaoSenha}
             mensagemValidacao="As senhas precisam ser iguais"
             exibirMensagemValidacao={
-              confirmaçãoSenha &&
-              !validarConfirmacaoSenha(senha, confirmaçãoSenha)
+              confirmacaoSenha &&
+              !validarConfirmacaoSenha(senha, confirmacaoSenha)
             }
           />
 
-          <Button
+          <Botao
             texto="Cadastrar"
             tipo="submit"
-            disabilitado={!validarForm() || submetendo}
+            desabilitado={!validarFormulario() || estaSubmetendo}
           />
         </form>
 
-        <div className="rodape_paginaPublica">
+        <div className="rodapePaginaPublica">
           <p>Já possui uma conta?</p>
-          <Link href="/">Faça seu Login agora!</Link>
+          <Link href="/">Faça seu login agora!</Link>
         </div>
       </div>
     </section>

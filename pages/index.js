@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import Login from "../components/Login";
-import usuarioServices from "../services/UsuarioServices";
-import Home from "../components/Home";
+import { useState, useEffect } from "react";
+import Home from "../componentes/home";
+import Login from "../componentes/login";
+import UsuarioService from "../services/UsuarioService";
 
-const usuarioservices = new usuarioServices();
-
+const usuarioService = new UsuarioService();
 export default function Index() {
   const [estaAutenticado, setEstaAutenticado] = useState(null);
 
   useEffect(() => {
-    setEstaAutenticado(usuarioservices.estaAutenticado());
+    setEstaAutenticado(
+      usuarioService.estaAutenticado()
+    );
   }, []);
 
   if (estaAutenticado === null) {
@@ -20,7 +21,5 @@ export default function Index() {
     return <Home />;
   }
 
-  return (
-      <Login aposAutenticacao={() => setEstaAutenticado(true)} />
-  );
+  return <Login aposAutenticacao={() => setEstaAutenticado(true)} />;
 }

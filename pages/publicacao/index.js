@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Button from "../../components/Button";
-import UploadImagem from "../../components/UploadImagem";
+import Botao from "../../componentes/botao";
+import CabecalhoComAcoes from "../../componentes/cabecalhoComAcoes";
+import UploadImagem from "../../componentes/uploadImagem";
 import comAutorizacao from "../../hoc/comAutorizacao";
 import imagemPublicacao from "../../public/imagens/imagemPublicacao.svg";
 import imagemSetaEsquerda from "../../public/imagens/setaEsquerda.svg";
 import FeedService from "../../services/FeedService";
-import CabecalhoComAcoes from "../../components/cabecalhoComAcoes";
 
 const limiteDaDescricao = 255;
 const descricaoMinima = 3;
@@ -102,14 +102,14 @@ function Publicacao() {
   };
 
   return (
-    <div className="paginaPublicacao largura">
+    <div className="paginaPublicacao largura30pctDesktop">
       <CabecalhoComAcoes
         className={obterClassNameCabecalho()}
         iconeEquerda={estaNaEtapaUm() ? null : imagemSetaEsquerda}
         textoEsquerda={obterTextoEsquerdaCabecalho()}
         aoClicarAcaoEsquerda={aoClicarAcaoEsquerdaCabecalho}
         elementoDireita={obterTextoDireitaCabecalho()}
-        acaoElementoDireita={aoClicarAcaoDireitaCabecalho}
+        aoClicarElementoDireita={aoClicarAcaoDireitaCabecalho}
         titulo="Nova publicação"
       />
 
@@ -131,9 +131,9 @@ function Publicacao() {
               Arraste sua foto aqui!
             </span>
 
-            <Button
+            <Botao
               texto="Selecionar uma imagem"
-              manipularClick={() => inputImagem?.click()}
+              manipularClique={() => inputImagem?.click()}
             />
           </div>
         ) : (
