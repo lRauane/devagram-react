@@ -12,7 +12,7 @@ export default class UsuarioService extends DevagramApiService {
         localStorage.setItem('id', usuario.data._id);
 
         if (usuario.data.avatar) {
-            localStorage.setItem("avatar", usuario.data.avatar);
+            localStorage.setItem("Avatar", usuario.data.avatar);
         }
     }
 
@@ -21,7 +21,7 @@ export default class UsuarioService extends DevagramApiService {
         localStorage.removeItem("email");
         localStorage.removeItem("token");
         localStorage.removeItem("id");
-        localStorage.removeItem("avatar");
+        localStorage.removeItem("Avatar");
     }
 
     async cadastro(dados) {
@@ -37,7 +37,7 @@ export default class UsuarioService extends DevagramApiService {
     }
 
     async pesquisar(termoDaPesquisa) {
-        return this.get('/pesquisa?filter=' + termoDaPesquisa);
+        return this.get('/pesquisa?filtro=' + termoDaPesquisa);
     }
 
     async obterPerfil(idUsuario) {
@@ -53,7 +53,7 @@ export default class UsuarioService extends DevagramApiService {
             id: localStorage.getItem('id'),
             nome: localStorage.getItem('nome'),
             email: localStorage.getItem('email'),
-            avatar: localStorage.getItem('avatar')
+            avatar: localStorage.getItem('Avatar')
         }
     }
 }

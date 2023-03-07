@@ -1,25 +1,26 @@
 import DevagramApiService from "./DevagramApiService";
 
-export default class FeedService extends DevagramApiService{
-  async carregarPostagens(idUsuario) {
-    let url = '/feed';
-    if (idUsuario) {
-        url += `?id=${idUsuario}`;
+export default class FeedService extends DevagramApiService {
+    async carregarPostagens(idUsuario) {
+        let url = '/feed';
+        if (idUsuario) {
+            url += `?id=${idUsuario}`;
+        }
+
+        return this.get(url);
     }
 
-    return this.get(url);
-}
-  async adicionarComentario(idPostagem, comentario){
-    return this.put(`/comentarios?id=${idPostagem}`, {
-      comentario
-    });
-  }
+    async adicionarComentario(idPostagem, comentario) {
+        return this.put(`/comentarios?id=${idPostagem}`, {
+            comentario
+        });
+    }
 
-  async alterarCurtida(idPostagem){
-    return this.put(`/like?id=${idPostagem}`)
-  }
+    async alterarCurtida(idPostagem) {
+        return this.put(`/like?id=${idPostagem}`);
+    }
 
-  async fazerPublicacao(dadosPublicacao) {
-    return this.post('/publicacao', dadosPublicacao);
-}
+    async fazerPublicacao(dadosPublicacao) {
+        return this.post('/publicacao', dadosPublicacao);
+    }
 }
