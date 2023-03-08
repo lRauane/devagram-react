@@ -7,30 +7,31 @@ const feedService = new FeedService();
 export default function Feed({ usuarioLogado, usuarioPerfil }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
 
-    useEffect(async () => {
+    useEffect(() => {
         setListaDePostagens([]);
-        const { data } = await feedService.carregarPostagens(usuarioPerfil?._id);
-
-        const postagensFormatadas = data.map((postagem) => (
-            {
-                id: postagem._id,
-                usuario: {
-                    id: postagem.userId,
-                    nome: postagem?.usuario?.nome || usuarioPerfil?.nome,
-                    avatar: postagem?.usuario?.avatar || usuarioPerfil?.avatar
-                },
-                fotoDoPost: postagem.foto,
-                descricao: postagem.descricao,
-                curtidas: postagem.likes,
-                comentarios: postagem.comentarios.map(c => ({
-                    nome: c.nome,
-                    mensagem: c.comentario
-                }))
-            }
-        ));
-
-        setListaDePostagens(postagensFormatadas);
-    }, [usuarioLogado, usuarioPerfil]);
+       async function user() {
+         const { data } = await feedService.carregarPostagens(usuarioPerfil?._id);
+   
+         const postagensFormatadas = data.map((postagem) => ({
+           id: postagem._id,
+           usuario: {
+             id: postagem.idUsuario,
+             nome: postagem?.usuario?.nome || usuarioPerfil?.nome,
+             avatar: postagem?.usuario?.avatar || usuarioPerfil?.avatar,
+           },
+           fotoPost: postagem.foto,
+           descricao: postagem.descricao,
+           curtidas: postagem.likes,
+           comentarios: postagem.comentario.map((c) => ({
+             nome: c.nome,
+             mensagem: c.comentario,
+           })),
+         }));
+         setListaDePostagens(postagensFormatadas);
+       }
+   
+       user();
+     }, [usuarioLogado, usuarioPerfil]);
 
     if (!listaDePostagens.length) {
         return null;
